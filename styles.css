@@ -54,27 +54,29 @@ body {
     opacity: .8;
 }
 
-.plus-row {
+.add-col {
     background-color: rgb(238, 171, 33);
     right: -52px;
-    bottom: 0;
+    top: 0;
 }
 
-.plus-col {
+.add-row {
     background-color: rgb(238, 171, 33);
     left: 0;
     bottom: -52px;
 }
 
-.minus-row {
-    background-color: rgb(181, 36, 35);
+.remove-row {
+    display: none;
     left: -52px;
-    bottom: 0;
+    top: 0;
+    background-color: rgb(181, 36, 35);
 }
 
-.minus-col {
-    background-color: rgb(181, 36, 35);
+.remove-col {
+    display: none;
     left: 0;
     top: -52px;
+    background-color: rgb(181, 36, 35);
 }
 
