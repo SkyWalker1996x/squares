@@ -1,17 +1,80 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-    font-weight: normal;
+html {
+    font-size: 10px;
 }
 
 body {
     padding: 0;
     margin: 0;
-    background: rgb(39, 39, 47);
-    background: linear-gradient(0deg, rgba(39, 39, 47, 1) 0%, rgba(12, 12, 154, 1) 10%, rgba(0, 212, 255, 1) 100%);
+    background-color: #ffffff;
 }
 
-.initial-test {
-    color: blue;
-    font-size: 2rem;
-    height: 100vh;
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-weight: normal;
 }
+
+.wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table {
+    padding: 1px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(71, 171, 233);
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(71, 171, 233);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.button {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    color: rgb(255, 255, 255);
+    font-size: 2.5rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity linear .3s;
+}
+
+.button:hover {
+    opacity: .8;
+}
+
+.plus-row {
+    background-color: rgb(238, 171, 33);
+    right: -52px;
+    bottom: 0;
+}
+
+.plus-col {
+    background-color: rgb(238, 171, 33);
+    left: 0;
+    bottom: -52px;
+}
+
+.minus-row {
+    background-color: rgb(181, 36, 35);
+    left: -52px;
+    bottom: 0;
+}
+
+.minus-col {
+    background-color: rgb(181, 36, 35);
+    left: 0;
+    top: -52px;
+}
+
