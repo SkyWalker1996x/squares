@@ -3,10 +3,14 @@ const removeRow = document.querySelector(".remove-row");
 const removeCol = document.querySelector(".remove-col");
 const addRow = document.querySelector(".add-row");
 const addCol = document.querySelector(".add-col");
+let removeColId = 1;
+let removeRowId = 1;
 
 table.addEventListener("mouseover", () => {
-  removeRow.style.display = "block";
-  removeCol.style.display = "block";
+  const rows = document.querySelectorAll(".row");
+  const cellsRow = document.querySelector(".row").querySelectorAll(".cell");
+  removeRow.style.display = rows.length <= 1 ? "none" : "block";
+  removeCol.style.display = cellsRow.length <= 1 ? "none" : "block";
 });
 
 table.addEventListener("mouseout", () => {
@@ -28,10 +32,19 @@ addCol.addEventListener("click", () => {
   });
 });
 
-removeCol.addEventListener("click", (e) => {
-  console.log(e);
+removeCol.addEventListener("click", () => {
+  const rows = document.querySelectorAll(".row");
+  removeCol.style.display = "none";
+  rows.forEach((i, index) => {
+    document
+      .querySelectorAll(".row")
+      [index].querySelectorAll(".cell")
+      [removeColId].remove();
+  });
 });
 
-removeRow.addEventListener("click", (e) => {
-  console.log(e);
+removeRow.addEventListener("click", () => {
+  const rows = document.querySelectorAll(".row");
+  removeRow.style.display = "none";
+  rows[removeRowId].remove();
 });
