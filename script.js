@@ -8,8 +8,6 @@ let removeRowId;
 const cellWidth = document.querySelector(".cell").offsetWidth;
 const cellHeight = document.querySelector(".cell").offsetHeight;
 
-console.log(cellWidth, cellHeight);
-
 table.addEventListener("mouseover", (e) => {
   const rows = document.querySelectorAll(".row");
   const cellsRow = document.querySelector(".row").querySelectorAll(".cell");
@@ -52,15 +50,9 @@ addCol.addEventListener("click", () => {
 });
 
 removeCol.addEventListener("click", () => {
-  console.log(removeColId);
   const rows = document.querySelectorAll(".row");
   removeCol.style.display = "none";
   rows.forEach((i, index) => {
-    console.log(
-      document.querySelectorAll(".row")[index].querySelectorAll(".cell")[
-        removeColId
-      ]
-    );
     document
       .querySelectorAll(".row")
       [index].querySelectorAll(".cell")
@@ -69,9 +61,7 @@ removeCol.addEventListener("click", () => {
 });
 
 removeRow.addEventListener("click", () => {
-  console.log(removeRowId);
   const rows = document.querySelectorAll(".row");
   removeRow.style.display = "none";
-  console.log(rows[removeRowId]);
   rows[removeRowId].remove();
 });
