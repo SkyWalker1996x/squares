@@ -5,6 +5,10 @@ const addRow = document.querySelector(".add-row");
 const addCol = document.querySelector(".add-col");
 let removeColId;
 let removeRowId;
+const cellWidth = document.querySelector(".cell").offsetWidth;
+const cellHeight = document.querySelector(".cell").offsetHeight;
+
+console.log(cellWidth, cellHeight);
 
 table.addEventListener("mouseover", (e) => {
   const rows = document.querySelectorAll(".row");
@@ -16,13 +20,15 @@ table.addEventListener("mouseover", (e) => {
   if (e.target.className === "cell") {
     const cellsArray = [...e.target.parentElement.children];
     const indexCell = cellsArray.indexOf(e.target);
-    removeCol.style.left = `${indexCell * 50}px`;
+    removeCol.style.left = `${indexCell * cellWidth}px`;
+    removeColId = indexCell;
 
     const rowsArray = [...e.target.parentElement.parentElement.children].filter(
       (item) => item.className === "row"
     );
     const indexRow = rowsArray.indexOf(e.target.parentElement);
-    removeRow.style.top = `${indexRow * 50}px`;
+    removeRow.style.top = `${indexRow * cellHeight}px`;
+    removeRowId = indexRow;
   }
 });
 
