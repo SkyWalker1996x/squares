@@ -3,14 +3,27 @@ const removeRow = document.querySelector(".remove-row");
 const removeCol = document.querySelector(".remove-col");
 const addRow = document.querySelector(".add-row");
 const addCol = document.querySelector(".add-col");
-let removeColId = 1;
-let removeRowId = 1;
+let removeColId;
+let removeRowId;
 
-table.addEventListener("mouseover", () => {
+table.addEventListener("mouseover", (e) => {
   const rows = document.querySelectorAll(".row");
   const cellsRow = document.querySelector(".row").querySelectorAll(".cell");
+
   removeRow.style.display = rows.length <= 1 ? "none" : "block";
   removeCol.style.display = cellsRow.length <= 1 ? "none" : "block";
+
+  if (e.target.className === "cell") {
+    const cellsArray = [...e.target.parentElement.children];
+    const indexCell = cellsArray.indexOf(e.target);
+    removeCol.style.left = `${indexCell * 50}px`;
+
+    const rowsArray = [...e.target.parentElement.parentElement.children].filter(
+      (item) => item.className === "row"
+    );
+    const indexRow = rowsArray.indexOf(e.target.parentElement);
+    removeRow.style.top = `${indexRow * 50}px`;
+  }
 });
 
 table.addEventListener("mouseout", () => {
@@ -33,9 +46,15 @@ addCol.addEventListener("click", () => {
 });
 
 removeCol.addEventListener("click", () => {
+  console.log(removeColId);
   const rows = document.querySelectorAll(".row");
   removeCol.style.display = "none";
   rows.forEach((i, index) => {
+    console.log(
+      document.querySelectorAll(".row")[index].querySelectorAll(".cell")[
+        removeColId
+      ]
+    );
     document
       .querySelectorAll(".row")
       [index].querySelectorAll(".cell")
@@ -44,7 +63,9 @@ removeCol.addEventListener("click", () => {
 });
 
 removeRow.addEventListener("click", () => {
+  console.log(removeRowId);
   const rows = document.querySelectorAll(".row");
   removeRow.style.display = "none";
+  console.log(rows[removeRowId]);
   rows[removeRowId].remove();
 });
