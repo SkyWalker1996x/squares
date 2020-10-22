@@ -17,7 +17,9 @@ body {
 }
 
 .wrapper {
-  height: 100vh;
+  height: auto;
+  width: fit-content;
+  padding: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
