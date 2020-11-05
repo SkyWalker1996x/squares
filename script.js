@@ -129,14 +129,14 @@ class Table {
     }
   };
 
-  /*handleEventListenersRemove = () => {
+  handleEventListenersRemove = () => {
     const oldTable = this.tableWrapper;
     const newTable = oldTable.cloneNode(true);
     oldTable.parentNode.replaceChild(newTable, oldTable);
-
     this.tableWrapper = newTable;
-  }*/
+  }
 }
+
 
 const firstTable = new Table("firstTable", 4, 4);
 const secondTable = new Table("secondTable", 5, 5);
