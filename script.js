@@ -98,15 +98,7 @@ class Table {
     this.tableWrapper.append(this.table);
 
     this.createButtons(buttons);
-
-    for (let i = 0; i < this.sizeRows; i++) {
-      const newRow = this.table.insertRow(-1);
-      newRow.classList.add("row");
-      for (let k = 0; k < this.sizeColumns; k++) {
-        const newCell = newRow.insertCell(-1);
-        newCell.classList.add("cell");
-      }
-    }
+    this.createTableElements(this.sizeRows, this.sizeColumns);
   };
 
   initEventListeners = () => {};
@@ -120,6 +112,17 @@ class Table {
       this[buttonName].textContent = textContent;
       this.tableWrapper.append(this[buttonName]);
     });
+  };
+
+  createTableElements = (sizeRows, sizeColumns) => {
+    for (let i = 0; i < sizeRows; i++) {
+      const newRow = this.table.insertRow(-1);
+      newRow.classList.add("row");
+      for (let k = 0; k < sizeColumns; k++) {
+        const newCell = newRow.insertCell(-1);
+        newCell.classList.add("cell");
+      }
+    }
   };
 }
 
