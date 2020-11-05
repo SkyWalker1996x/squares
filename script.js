@@ -5,10 +5,6 @@ class Table {
   }
 
   initTableElements = (selector, sizeRows, sizeColumns) => {
-    this.selector = selector;
-    this.sizeRows = sizeRows;
-    this.sizeColumns = sizeColumns;
-
     const buttons = [
       {
         buttonName: "addRowButton",
@@ -37,29 +33,19 @@ class Table {
       },
     ];
 
-    this.tableWrapper = document.createElement("div");
-    this.table = document.createElement("table");
-
-    this.tableWrapper.classList.add("table-wrapper");
-    this.table.classList.add("table");
-    this.table.id = this.selector;
-    this.rowsCollection = this.table.rows;
-
-    document.body.append(this.tableWrapper);
-    this.tableWrapper.append(this.table);
-
+    this.createTable(selector);
     this.createButtons(buttons);
-    this.createTableElements(this.sizeRows, this.sizeColumns);
+    this.createTableElements(sizeRows, sizeColumns);
   };
 
   initEventListeners = () => {
-    this.tableWrapper.addEventListener("mouseover", this.onMouseoverTable.bind(this));
-    this.tableWrapper.addEventListener("mouseout", this.hiddenRemoveButton.bind(this));
-    this.addRowButton.addEventListener("click", this.handleRowAppend.bind(this));
-    this.addColButton.addEventListener("click", this.handleColAppend.bind(this));
-    this.deleteRowButton.addEventListener("click", this.handleRowRemove.bind(this));
-    this.deleteColButton.addEventListener("click", this.handleColRemove.bind(this));
-    this.deleteListenersButton.addEventListener('click', this.handleEventListenersRemove.bind(this));
+    this.tableWrapper.addEventListener("mouseover", this.onMouseoverTable);
+    this.tableWrapper.addEventListener("mouseout", this.hiddenRemoveButton);
+    this.addRowButton.addEventListener("click", this.handleRowAppend);
+    this.addColButton.addEventListener("click", this.handleColAppend);
+    this.deleteRowButton.addEventListener("click", this.handleRowRemove);
+    this.deleteColButton.addEventListener("click", this.handleColRemove);
+    this.deleteListenersButton.addEventListener('click', this.handleEventListenersRemove);
   };
 
   createButtons = (buttons) => {
@@ -71,6 +57,17 @@ class Table {
       this[buttonName].textContent = textContent;
       this.tableWrapper.append(this[buttonName]);
     });
+  };
+
+  createTable = (selector) => {
+    this.tableWrapper = document.createElement("div");
+    this.table = document.createElement("table");
+    this.tableWrapper.classList.add("table-wrapper");
+    this.table.classList.add("table");
+    this.table.id = selector;
+    this.rowsCollection = this.table.rows;
+    document.body.append(this.tableWrapper);
+    this.tableWrapper.append(this.table);
   };
 
   createTableElements = (sizeRows, sizeColumns) => {
@@ -134,10 +131,8 @@ class Table {
     const newTable = oldTable.cloneNode(true);
     oldTable.parentNode.replaceChild(newTable, oldTable);
     this.tableWrapper = newTable;
-  }
+  };
 }
-
 
 const firstTable = new Table("firstTable", 4, 4);
 const secondTable = new Table("secondTable", 5, 5);
-
