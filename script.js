@@ -64,32 +64,40 @@ class Table {
     this.sizeRows = sizeRows;
     this.sizeColumns = sizeColumns;
 
+    const buttons = [
+      {
+        buttonName: "addRowButton",
+        className: "add-row",
+        textContent: "+",
+      },
+      {
+        buttonName: "addColButton",
+        className: "add-col",
+        textContent: "+",
+      },
+      {
+        buttonName: "deleteRowButton",
+        className: "remove-row",
+        textContent: "-",
+      },
+      {
+        buttonName: "deleteColButton",
+        className: "remove-col",
+        textContent: "-",
+      },
+    ];
+
     this.tableWrapper = document.createElement("div");
     this.table = document.createElement("table");
-    this.addRowButton = document.createElement("button");
-    this.addColButton = document.createElement("button");
-    this.deleteRowButton = document.createElement("button");
-    this.deleteColButton = document.createElement("button");
 
     this.tableWrapper.classList.add("table-wrapper");
     this.table.classList.add("table");
     this.table.id = this.selector;
-    this.addRowButton.classList.add("add-row", "button");
-    this.addColButton.classList.add("add-col", "button");
-    this.deleteRowButton.classList.add("remove-row", "button");
-    this.deleteColButton.classList.add("remove-col", "button");
 
     document.body.append(this.tableWrapper);
     this.tableWrapper.append(this.table);
-    this.tableWrapper.append(this.addRowButton);
-    this.tableWrapper.append(this.addColButton);
-    this.tableWrapper.append(this.deleteRowButton);
-    this.tableWrapper.append(this.deleteColButton);
 
-    this.addRowButton.textContent = "+";
-    this.addColButton.textContent = "+";
-    this.deleteRowButton.textContent = "-";
-    this.deleteColButton.textContent = "-";
+    this.createButtons(buttons);
 
     for (let i = 0; i < this.sizeRows; i++) {
       const newRow = this.table.insertRow(-1);
@@ -102,6 +110,17 @@ class Table {
   };
 
   initEventListeners = () => {};
+
+  createButtons = (buttons) => {
+    buttons.forEach((button) => {
+      const { buttonName, className, textContent } = button;
+
+      this[buttonName] = document.createElement("button");
+      this[buttonName].classList.add(className, "button");
+      this[buttonName].textContent = textContent;
+      this.tableWrapper.append(this[buttonName]);
+    });
+  };
 }
 
 const newTable = new Table("new-table", 4, 4);
