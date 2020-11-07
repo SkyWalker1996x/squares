@@ -22,7 +22,7 @@ const buttons = [
   {
     buttonName: "deleteListenersButton",
     className: "remove-listeners",
-    textContent: "RL",
+    textContent: "RT",
   },
 ];
 
@@ -58,10 +58,7 @@ class Table {
     this.addColButton.addEventListener("click", this.handleColAppend);
     this.deleteRowButton.addEventListener("click", this.handleRowRemove);
     this.deleteColButton.addEventListener("click", this.handleColRemove);
-    this.deleteListenersButton.addEventListener(
-      "click",
-      this.handleEventListenersRemove
-    );
+    this.deleteListenersButton.addEventListener("click", this.delete);
   };
 
   createButtons = () => {
@@ -124,12 +121,12 @@ class Table {
     }
   };
 
-  onMouseoverTable = (e) => {
+  onMouseoverTable = (event) => {
     this.deleteRowButton.style.display =
       this.rows.length <= 1 ? "none" : "block";
     this.deleteColButton.style.display =
       this.rows[0].childElementCount <= 1 ? "none" : "block";
-    const { target } = e;
+    const { target } = event;
 
     if (target.className === "cell") {
       this.removeCellId = target.cellIndex;
@@ -139,18 +136,25 @@ class Table {
     }
   };
 
-  handleEventListenersRemove = () => {
-    const oldTable = this.parent;
-    const newTable = oldTable.cloneNode(true);
-    oldTable.parentNode.replaceChild(newTable, oldTable);
-    this.parent = newTable;
+  delete = () => {
+    this.parent.removeEventListener("mouseover", this.onMouseoverTable);
+    this.parent.removeEventListener("mouseout", this.hiddenRemoveButton);
+    this.addRowButton.removeEventListener("click", this.handleRowAppend);
+    this.addColButton.removeEventListener("click", this.handleColAppend);
+    this.deleteRowButton.removeEventListener("click", this.handleRowRemove);
+    this.deleteColButton.removeEventListener("click", this.handleColRemove);
+    this.deleteListenersButton.removeEventListener("click", this.delete);
+
+    while (this.parent.firstChild) {
+      this.parent.removeChild(this.parent.firstChild);
+    }
   };
 }
 
 const tableConfig = {
   selector: "table",
-  rowsNumber: 7,
-  columnsNumber: 7,
+  rowsNumber: 4,
+  columnsNumber: 4,
 };
 
 const firstTable = new Table(tableConfig);
